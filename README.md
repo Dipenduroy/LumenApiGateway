@@ -16,6 +16,10 @@ Set mysql db connection and service basic auth credentials
 
 php artisan migrate
 
-## Run lumen
+## Run LumenApiGateway
 
 php -S localhost:8000 -t public
+
+## Import Postman collection
+
+Configure host and port in the endpoints
