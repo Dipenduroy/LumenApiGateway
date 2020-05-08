@@ -10,7 +10,7 @@ cp .env.example .env
 
 ## Configure .env
 
-Set mysql db connection and service basic auth credentials
+Set mysql db connection, service basic auth credentials and URL for micro services
 
 ## Migrate db
 
@@ -20,7 +20,7 @@ php artisan migrate
 
 php -S localhost:8000 -t public
 
-## Import Postman collection
+## Import Postman collection and environment
 
 Configure host and port in the endpoints
 
@@ -28,6 +28,12 @@ Configure host and port in the endpoints
 
 Documentation for the User preferences Micro service in Lumen can be found on the [LumenUserPreferencesDemo](https://github.com/Dipenduroy/LumenUserPreferencesDemo).
 
+Documentation for the User subjects Micro service in Lumen can be found on the [LumenUserSubjectsDemo](https://github.com/Dipenduroy/LumenUserSubjectsDemo).
+
 ## Configure User preferences Micro service URL
 
-Set correct url for service in ApigatewayController.php, replace http://local.userpreferences/
+Set correct url for USER_PREFERENCES_SERVICE in .env file
+
+## Configure User subjects Micro service URL
+
+Set correct url for USER_SUBJECTS_SERVICE in .env file
