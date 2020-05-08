@@ -23,3 +23,7 @@ php -S localhost:8000 -t public
 ## Import Postman collection
 
 Configure host and port in the endpoints
+
+## Official Documentation
+
+Documentation for the User preferences Micro service in Lumen can be found on the [LumenUserPreferencesDemo](https://github.com/Dipenduroy/LumenUserPreferencesDemo).
