@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller {
 
@@ -23,24 +24,25 @@ class RegisterController extends Controller {
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'name' => 'required|max:200',
+            'email' => 'required|email|unique:users|max:200',
+            'password' => 'required|max:200',
             'user_subject' => 'array'
         ]);
         $userdata = $request->only(['name', 'email', 'password']);
-        $userdata['api_token'] = uniqid(true);
-        $user = User::create($userdata);
-        $response['user'] = $user;
+        $userdata['password'] = Hash::make($userdata['password']);
+        $response = User::create($userdata);
         $user_subject_data = $request->input('user_subject', []);
         if (!empty($user_subject_data)) {
-            $user_subject_response_string = $this->getServiceResponse('USER_SUBJECTS_SERVICE', 'post', 'api/usersubjects', [],
-                    ['user_subject' => $user_subject_data,
-                        'user_id' => $user->id
-                    ], true);
-            $response['user_subject'] = json_decode($user_subject_response_string, 1);
+            $user_subject_response_string = $this->getServiceResponse('USER_SUBJECTS', 'post',
+                    'api/user-subjects/user/' . $response->id, [],
+                    ['user_subject' => $user_subject_data], true);
+            $user_subject = json_decode($user_subject_response_string, 1);
+            if (!empty($user_subject)) {
+                $response['user_subject'] = $user_subject;
+            }
         }
-        return response()->json($response);
+        return response()->json($response, 201);
     }
 
 }

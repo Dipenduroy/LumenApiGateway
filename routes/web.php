@@ -14,20 +14,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->post('/register', [
+$router->post('register', [
     'as' => 'register', 'uses' => 'RegisterController@store'
 ]);
-$router->post('/user', [
-    'as' => 'user', 'uses' => 'UserController@index'
-]);
 $router->group(['middleware' => 'auth','prefix'=>'api'], function () use ($router) {
-    $router->get('{any:.*}', [
-        'as' => 'apigateway', 'uses' => 'ApigatewayController@get'
+    $router->post('profile', [
+        'as' => 'profile', 'uses' => 'UserController@profile'
     ]);
-    $router->post('{any:.*}', [
-        'as' => 'apigateway', 'uses' => 'ApigatewayController@post'
-    ]);
-    $router->delete('{any:.*}', [
-        'as' => 'apigateway', 'uses' => 'ApigatewayController@post'
-    ]);
+    $router->addRoute(['GET','POST','PATCH','DELETE'], '{any:.*}', 'ApigatewayController@handle');
 });

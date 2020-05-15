@@ -15,32 +15,41 @@
 						{
 							"name": "User preferences Service",
 							"protocolProfileBehavior": {
-								"disableBodyPruning": true
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"accept": true
+								}
 							},
 							"request": {
 								"auth": {
 									"type": "basic",
 									"basic": [
 										{
-											"key": "password",
-											"value": "{{SERVICE_PASSWORD}}",
+											"key": "username",
+											"value": "{{SERVICE_USERNAME}}",
 											"type": "string"
 										},
 										{
-											"key": "username",
-											"value": "{{SERVICE_USERNAME}}",
+											"key": "password",
+											"value": "{{SERVICE_PASSWORD}}",
 											"type": "string"
 										}
 									]
 								},
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": []
 								},
 								"url": {
-									"raw": "http://local.userpreferences/api/userpreferences?user_id=1",
+									"raw": "http://local.userpreferences/api/user-preferences/user/2",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -48,20 +57,21 @@
 									],
 									"path": [
 										"api",
-										"userpreferences"
-									],
-									"query": [
-										{
-											"key": "user_id",
-											"value": "1"
-										}
+										"user-preferences",
+										"user",
+										"2"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Set User preference Service",
+							"name": "Add User preference Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
 									"type": "basic",
@@ -79,15 +89,16 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
-										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
 										{
 											"key": "user_preference",
 											"value": "Playing instrument",
@@ -96,7 +107,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://local.userpreferences/api/userpreferences",
+									"raw": "http://local.userpreferences/api/user-preferences/user/2",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -104,7 +115,9 @@
 									],
 									"path": [
 										"api",
-										"userpreferences"
+										"user-preferences",
+										"user",
+										"2"
 									]
 								}
 							},
@@ -112,6 +125,11 @@
 						},
 						{
 							"name": "Delete User preference Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
 									"type": "basic",
@@ -128,30 +146,20 @@
 										}
 									]
 								},
-								"method": "POST",
-								"header": [],
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "user_preference",
-											"value": "Playing instrument",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										}
-									]
+									"formdata": []
 								},
 								"url": {
-									"raw": "http://local.userpreferences/api/userpreferences",
+									"raw": "http://local.userpreferences/api/user-preferences/user/2/id/5",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -159,7 +167,71 @@
 									],
 									"path": [
 										"api",
+										"user-preferences",
+										"user",
+										"2",
+										"id",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User preference Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{SERVICE_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{SERVICE_USERNAME}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "user_preference",
+											"value": "gos",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://local.userpreferences/api/user-preferences/user/2/id/2",
+									"protocol": "http",
+									"host": [
+										"local",
 										"userpreferences"
+									],
+									"path": [
+										"api",
+										"user-preferences",
+										"user",
+										"2",
+										"id",
+										"2"
 									]
 								}
 							},
@@ -175,7 +247,10 @@
 						{
 							"name": "User Subjects Service",
 							"protocolProfileBehavior": {
-								"disableBodyPruning": true
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"accept": true
+								}
 							},
 							"request": {
 								"auth": {
@@ -194,13 +269,19 @@
 									]
 								},
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": []
 								},
 								"url": {
-									"raw": "http://local.usersubjects/api/usersubjects?user_id=1",
+									"raw": "http://local.usersubjects/api/user-subjects/user/2",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -208,20 +289,21 @@
 									],
 									"path": [
 										"api",
-										"usersubjects"
-									],
-									"query": [
-										{
-											"key": "user_id",
-											"value": "1"
-										}
+										"user-subjects",
+										"user",
+										"2"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Set User Subjects Service",
+							"name": "Add User Subjects Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
 									"type": "basic",
@@ -239,15 +321,16 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
-										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
 										{
 											"key": "user_subject[]",
 											"value": "English",
@@ -261,7 +344,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://local.usersubjects/api/usersubjects",
+									"raw": "http://local.usersubjects/api/user-subjects/user/2",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -269,7 +352,9 @@
 									],
 									"path": [
 										"api",
-										"usersubjects"
+										"user-subjects",
+										"user",
+										"2"
 									]
 								}
 							},
@@ -277,6 +362,11 @@
 						},
 						{
 							"name": "Delete User Subjects Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
 									"type": "basic",
@@ -293,30 +383,26 @@
 										}
 									]
 								},
-								"method": "POST",
-								"header": [],
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
-										{
 											"key": "user_subject",
 											"value": "English",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "DELETE",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://local.usersubjects/api/usersubjects",
+									"raw": "http://local.usersubjects/api/user-subjects/user/2/id/3",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -324,7 +410,71 @@
 									],
 									"path": [
 										"api",
+										"user-subjects",
+										"user",
+										"2",
+										"id",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Subjects Service",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{SERVICE_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{SERVICE_USERNAME}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "user_subject",
+											"value": "gos",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://local.usersubjects/api/user-subjects/user/2/id/3",
+									"protocol": "http",
+									"host": [
+										"local",
 										"usersubjects"
+									],
+									"path": [
+										"api",
+										"user-subjects",
+										"user",
+										"2",
+										"id",
+										"3"
 									]
 								}
 							},
@@ -345,14 +495,32 @@
 					"item": [
 						{
 							"name": "User Preferences",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
-									"type": "noauth"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
 								},
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "http://local.apigateway/api/userpreferences?api_token=15eb3a2be0d7b4&user_id=1&request_api=USER_PREFERENCES_SERVICE",
+									"raw": "http://local.apigateway/api/user-preferences/user/2",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -360,63 +528,52 @@
 									],
 									"path": [
 										"api",
-										"userpreferences"
-									],
-									"query": [
-										{
-											"key": "api_token",
-											"value": "15eb3a2be0d7b4"
-										},
-										{
-											"key": "user_id",
-											"value": "1"
-										},
-										{
-											"key": "request_api",
-											"value": "USER_PREFERENCES_SERVICE"
-										}
+										"user-preferences",
+										"user",
+										"2"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Set User preference",
+							"name": "Add User preference",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "password",
-											"value": "{{SERVICE_PASSWORD}}",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "{{SERVICE_USERNAME}}",
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
-										{
 											"key": "user_preference",
-											"value": "Playing instrument",
+											"value": "Playing music instrument",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://local.apigateway/api/userpreferences?api_token=15eb3a2be0d7b4&request_api=USER_PREFERENCES_SERVICE",
+									"raw": "http://local.apigateway/api/user-preferences/user/3",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -424,17 +581,9 @@
 									],
 									"path": [
 										"api",
-										"userpreferences"
-									],
-									"query": [
-										{
-											"key": "api_token",
-											"value": "15eb3a2be0d7b4"
-										},
-										{
-											"key": "request_api",
-											"value": "USER_PREFERENCES_SERVICE"
-										}
+										"user-preferences",
+										"user",
+										"3"
 									]
 								}
 							},
@@ -442,31 +591,36 @@
 						},
 						{
 							"name": "Delete User preference",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
 							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
+								"auth": {
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "user_id",
-											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										},
-										{
-											"key": "user_preference",
-											"value": "Playing instrument",
-											"type": "text"
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
 										}
 									]
 								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
-									"raw": "http://local.apigateway/api/userpreferences?api_token=15eb3a2be0d7b4&request_api=USER_PREFERENCES_SERVICE",
+									"raw": "http://local.apigateway/api/user-preferences/user/2/id/5",
 									"protocol": "http",
 									"host": [
 										"local",
@@ -474,17 +628,278 @@
 									],
 									"path": [
 										"api",
-										"userpreferences"
-									],
-									"query": [
+										"user-preferences",
+										"user",
+										"2",
+										"id",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User preference",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "api_token",
-											"value": "15eb3a2be0d7b4"
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "user_preference",
+											"value": "go",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://local.apigateway/api/user-preferences/user/2/id/2",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"api",
+										"user-preferences",
+										"user",
+										"2",
+										"id",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User Subjects",
+					"item": [
+						{
+							"name": "User Subjects",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://local.apigateway/api/user-subjects/user/2",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"api",
+										"user-subjects",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add User Subjects",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_subject[]",
+											"value": "English",
+											"type": "text"
 										},
 										{
-											"key": "request_api",
-											"value": "USER_PREFERENCES_SERVICE"
+											"key": "user_subject[]",
+											"value": "Maths",
+											"type": "text"
 										}
+									]
+								},
+								"url": {
+									"raw": "http://local.apigateway/api/user-subjects/user/2",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"api",
+										"user-subjects",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User Subjects",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://local.apigateway/api/user-subjects/user/2/id/5",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"api",
+										"user-subjects",
+										"user",
+										"2",
+										"id",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Subjects",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "user_subject",
+											"value": "go",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://local.apigateway/api/user-subjects/user/2/id/2",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"api",
+										"user-subjects",
+										"user",
+										"2",
+										"id",
+										"2"
 									]
 								}
 							},
@@ -498,17 +913,218 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "Oauth",
+			"item": [
+				{
+					"name": "Request token",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": \"1\",\n    \"client_secret\": \"QPSIgP3p08E08fA8jP816tdINWhuZCGz0yYMf23A\",\n    \"username\": \"dipenduroy007@gmail.com\",\n    \"password\": \"dipendu\",\n    \"scope\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://local.apigateway/oauth/token",
+							"protocol": "http",
+							"host": [
+								"local",
+								"apigateway"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Request token - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": \"1\",\n    \"client_secret\": \"QPSIgP3p08E08fA8jP816tdINWhuZCGz0yYMf23A\",\n    \"username\": \"dipenduroy007@gmail.com\",\n    \"password\": \"dipendu\",\n    \"scope\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://local.apigateway/oauth/token",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.10.3 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 May 2020 06:08:36 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 31536000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs\",\n    \"refresh_token\": \"def5020036b16faacbb19c9c9350e8d8346b855b0c0f77425545f8c104f7a0859c31afc0faca12e7714c48e8ef56d4384e41e483a96b90b55a69c667f6d36b74f059e52f0774892b3d5edc228a10eebf0965dcadc0b594a41c3deb0a1e5142591d05e75709e1b43dca347f069a6701c9b8ea4203940d9a1a02078aa38e61be2e4011a1ec32dfcaab874785df5fd695cabaaf93cec3f391b03fc38ea0c560e20f4e71633de88f93677b46bce60b18b8a62682ac12de66b4b4251eeded186b84c48fe8de5f68f7dd0b185a91cafa9cc84ae220a659b3186159723659b828ee9cbcf706d6507e67f5b0394b776127b6b6d8c8be0909e576e12811cbe91dbdc52271848f3c37683eb2d0a40c5bd50bb82e918dfe5febe069e338655ce98f2ed91a8b189101e05856fb975866060ccf558a2269cae2d585544921d6cdab2e001de05017ecfcd96fa59d5d18bad1b6b3836ac6f7f5b164935349db7a28762ae0c38e19b3\"\n}"
+						},
+						{
+							"name": "Request token - Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": \"1\",\n    \"client_secret\": \"QPSIgP3p08E08fA8jP816tdINWhuZCGz0yYMf23A\",\n    \"username\": \"dipenduroy007@gmail.com\",\n    \"password\": \"dipendu_\",\n    \"scope\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://local.apigateway/oauth/token",
+									"protocol": "http",
+									"host": [
+										"local",
+										"apigateway"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.10.3 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 14 May 2020 06:09:04 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid_grant\",\n    \"error_description\": \"The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.\",\n    \"hint\": \"\",\n    \"message\": \"The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Register",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "email",
-							"value": "dipenduroy007@gmail.co.in",
-							"type": "text"
+							"value": "dipenduroy007@gmail.com",
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "password",
@@ -529,6 +1145,16 @@
 							"key": "user_subject[]",
 							"value": "Maths",
 							"type": "text"
+						},
+						{
+							"key": "data_for_negative_test_case",
+							"value": "l3H1KEHktIC0XBjCkR2pllw7SrpBFm8oQshmOn96gDIjT0ps7TBYqWOWGRLGlDFHulOFmfGz67sR4KRVR0Th2PWMm7t3PAwo5N8IS3aK8P38GEmFvwQCpySFWAAeSHPA007ORJTAmsarxu1YYRAR46q2kukXd2HviY60Kzg5KpaPQyz0Z6cY0X7uOTg9H6EwH374UXpUoYZ0v6pNVY6vln1mlatqcHsukmIMZTTkp7Ma5uxDJZc0ARJBEOymjTesflb83j7O8QjKTSsgfEvsGmmNhmlNLYEboO07gImIuRik4wfHOveKBUhdJWdxc6ZSoMwyMjA0kbcqb4UPmPIJIsGeuaIs1KKmRUqjMTdND3Pw1rh2htbfoWs1WcEOB14a0sIo5Hiq1h1ljwkI7eSHXEhPw5KQ5lpnpwbMMk91JPwBSNcViELHIOVKjxX4JXtDmCvgZkCsBmMfWtaNBJqBFLZbOb2JcLVt4wnevxWnHU7HxJ7s7Hhx",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dipendu.roy@emxcelsolutions.com",
+							"type": "text"
 						}
 					]
 				},
@@ -546,10 +1172,16 @@
 			},
 			"response": [
 				{
-					"name": "Register",
+					"name": "Register Failed with Validation errors",
 					"originalRequest": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -567,6 +1199,21 @@
 									"key": "name",
 									"value": "Dipendu Roy",
 									"type": "text"
+								},
+								{
+									"key": "user_subject[]",
+									"value": "English",
+									"type": "text"
+								},
+								{
+									"key": "user_subject[]",
+									"value": "Maths",
+									"type": "text"
+								},
+								{
+									"key": "data_for_negative_test_case",
+									"value": "l3H1KEHktIC0XBjCkR2pllw7SrpBFm8oQshmOn96gDIjT0ps7TBYqWOWGRLGlDFHulOFmfGz67sR4KRVR0Th2PWMm7t3PAwo5N8IS3aK8P38GEmFvwQCpySFWAAeSHPA007ORJTAmsarxu1YYRAR46q2kukXd2HviY60Kzg5KpaPQyz0Z6cY0X7uOTg9H6EwH374UXpUoYZ0v6pNVY6vln1mlatqcHsukmIMZTTkp7Ma5uxDJZc0ARJBEOymjTesflb83j7O8QjKTSsgfEvsGmmNhmlNLYEboO07gImIuRik4wfHOveKBUhdJWdxc6ZSoMwyMjA0kbcqb4UPmPIJIsGeuaIs1KKmRUqjMTdND3Pw1rh2htbfoWs1WcEOB14a0sIo5Hiq1h1ljwkI7eSHXEhPw5KQ5lpnpwbMMk91JPwBSNcViELHIOVKjxX4JXtDmCvgZkCsBmMfWtaNBJqBFLZbOb2JcLVt4wnevxWnHU7HxJ7s7Hhx",
+									"type": "text"
 								}
 							]
 						},
@@ -579,6 +1226,274 @@
 							],
 							"path": [
 								"register"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.10.3 (Ubuntu)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2020 06:01:41 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"email\": [\n        \"The email has already been taken.\"\n    ]\n}"
+				},
+				{
+					"name": "Register Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "dipenduroy007@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "dipendu",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Dipendu Roy",
+									"type": "text"
+								},
+								{
+									"key": "user_subject[]",
+									"value": "English",
+									"type": "text"
+								},
+								{
+									"key": "user_subject[]",
+									"value": "Maths",
+									"type": "text"
+								},
+								{
+									"key": "data_for_negative_test_case",
+									"value": "l3H1KEHktIC0XBjCkR2pllw7SrpBFm8oQshmOn96gDIjT0ps7TBYqWOWGRLGlDFHulOFmfGz67sR4KRVR0Th2PWMm7t3PAwo5N8IS3aK8P38GEmFvwQCpySFWAAeSHPA007ORJTAmsarxu1YYRAR46q2kukXd2HviY60Kzg5KpaPQyz0Z6cY0X7uOTg9H6EwH374UXpUoYZ0v6pNVY6vln1mlatqcHsukmIMZTTkp7Ma5uxDJZc0ARJBEOymjTesflb83j7O8QjKTSsgfEvsGmmNhmlNLYEboO07gImIuRik4wfHOveKBUhdJWdxc6ZSoMwyMjA0kbcqb4UPmPIJIsGeuaIs1KKmRUqjMTdND3Pw1rh2htbfoWs1WcEOB14a0sIo5Hiq1h1ljwkI7eSHXEhPw5KQ5lpnpwbMMk91JPwBSNcViELHIOVKjxX4JXtDmCvgZkCsBmMfWtaNBJqBFLZbOb2JcLVt4wnevxWnHU7HxJ7s7Hhx",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://local.apigateway/register",
+							"protocol": "http",
+							"host": [
+								"local",
+								"apigateway"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.10.3 (Ubuntu)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2020 06:00:13 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Dipendu Roy\",\n    \"email\": \"dipenduroy007@gmail.com\",\n    \"updated_at\": \"2020-05-14T06:00:12.000000Z\",\n    \"created_at\": \"2020-05-14T06:00:12.000000Z\",\n    \"id\": 2,\n    \"user_subject\": [\n        {\n            \"id\": 1,\n            \"user_id\": 2,\n            \"subject\": \"English\",\n            \"created_at\": \"2020-05-14T06:00:13.000000Z\",\n            \"updated_at\": \"2020-05-14T06:00:13.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 2,\n            \"subject\": \"Maths\",\n            \"created_at\": \"2020-05-14T06:00:13.000000Z\",\n            \"updated_at\": \"2020-05-14T06:00:13.000000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "User Profile",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2MzZTMyMjM1ZTNiYTdhZTgyN2RjMmU0MWU5NGNkNWExNDFmOTlmMzNhNDU2MDc0N2E5OGEyNTE0MGI0M2Q0YTU3NjkxZDkyNmI1ODJmYzAiLCJpYXQiOjE1ODk0MzY1MTUsIm5iZiI6MTU4OTQzNjUxNSwiZXhwIjoxNjIwOTcyNTE1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.NJ-PP8olPBJVw4f57EzaY-hcdkLaXaCKLqfbLlSGamypQvl5dONW6DVlQJaqAsCEz0X1KOnXfue42bp2oCmDxz0tO3E6UjaJQ68gJm75AWBS2P8rp3xWkq3LaY68fBbXDEz57rCx5XC-ju3u7VBU4kX1at-WBZ0cBU_9inkhwA3tLp8wP99OPPpwcgb8FGe6gqmpiYjQFz_pN7zaYdpe3GnOAE8KOBROzRDif834Ek7RmgZ_B6aoIw2aNBXLCcf0soolVRf2NMWrifdS8rmhiZ0cp6e36RYOcsOXOh5SyktJMP7EC6LfySfXqKa68amDYsDui7lGyH7vooWXwbKE87FiIbrfpdX8j8kh_7m_scXpKV4oJoH9we7dhIf11ABRzgeqnacPV9DDwBXC0XRyq8NQhnURn0WPIzqXK8A1n1xhHzf1WBysvVpNUQD9VZiOqHtGstczXB0XFdnM0BDf-o0X106zQ5YzLgVaqB3EiuGpPpz10apiSNwERrCy2VV3umndXWyDs3sI_tB6Ts1_NU9WoWGxkNzhjtkRhIWLjSp3qCcgMsqJvx-Zb-pEC62f3aGdZTrJJmKbnx57hx7VEJSWrEhz-NfLON3gmYfg3Uy_rdD1Ap7DtEZifbo3UA7rqb547otJQuocUiGedKiehTxqrCSJigttpAcwm8mvPPs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://local.apigateway/api/profile",
+					"protocol": "http",
+					"host": [
+						"local",
+						"apigateway"
+					],
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Profile - Unauthorized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://local.apigateway/api/user",
+							"protocol": "http",
+							"host": [
+								"local",
+								"apigateway"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.10.3 (Ubuntu)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2020 06:36:05 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Unauthorized.\"\n}"
+				},
+				{
+					"name": "User Profile - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://local.apigateway/api/user",
+							"protocol": "http",
+							"host": [
+								"local",
+								"apigateway"
+							],
+							"path": [
+								"api",
+								"user"
 							]
 						}
 					},
@@ -603,52 +1518,22 @@
 							"value": "keep-alive"
 						},
 						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
 							"key": "Cache-Control",
 							"value": "no-cache, private"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 May 2020 05:55:10 GMT"
+							"value": "Thu, 14 May 2020 06:36:42 GMT"
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"name\": \"Dipendu Roy\",\n    \"email\": \"dipenduroy007@gmail.com\",\n    \"api_token\": \"15eb3a2be0d7b4\",\n    \"updated_at\": \"2020-05-07T05:55:10.000000Z\",\n    \"created_at\": \"2020-05-07T05:55:10.000000Z\",\n    \"id\": 1\n}"
+					"body": "{\n    \"id\": 2,\n    \"name\": \"Dipendu Roy\",\n    \"email\": \"dipenduroy007@gmail.com\",\n    \"created_at\": \"2020-05-14T06:00:12.000000Z\",\n    \"updated_at\": \"2020-05-14T06:00:12.000000Z\"\n}"
 				}
 			]
-		},
-		{
-			"name": "User Profile",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "dipenduroy007@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "dipendu",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://local.apigateway/user",
-					"protocol": "http",
-					"host": [
-						"local",
-						"apigateway"
-					],
-					"path": [
-						"user"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

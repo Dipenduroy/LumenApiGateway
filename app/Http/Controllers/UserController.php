@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,16 +17,12 @@ class UserController extends Controller
     }
 
     /**
-     * Register a user.
+     * Get users profile.
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function profile()
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password'=>'required'
-        ]);
-        return User::where('email', $request->input('email'))->where('password', $request->input('password'))->first();
+        return Auth::user();
     }
 }

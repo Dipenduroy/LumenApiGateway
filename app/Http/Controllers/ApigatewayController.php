@@ -16,50 +16,17 @@ class ApigatewayController extends Controller {
     }
 
     /**
-     * Get API gateway.
+     * API gateway handle.
      *
      * @return Response
      */
-    public function get(Request $request) {
-        $this->validate($request, [
-            'request_api' => 'required',
-        ]);
-        $input = $request->all();
-        $query = $request->query();
+    public function handle(Request $request) {
         $path = $request->path();
-        return $this->getServiceResponse($input['request_api'], 'get', $path, $query);
-    }
-
-    /**
-     * POST API gateway.
-     *
-     * @return Response
-     */
-    public function post(Request $request) {
-        $this->validate($request, [
-            'request_api' => 'required',
-        ]);
-        $input = $request->all();
+        list(,$request_api)=explode('/',$path);
+        $method = $request->method();
         $query = $request->query();
-        $post = $request->post();
-        $path = $request->path();
-        return $this->getServiceResponse($input['request_api'], 'post', $path, $query, $post);
-    }
-
-    /**
-     * DELETE API gateway.
-     *
-     * @return Response
-     */
-    public function delete(Request $request) {
-        $this->validate($request, [
-            'request_api' => 'required',
-        ]);
-        $input = $request->all();
-        $query = $request->query();
-        $post = $request->post();
-        $path = $request->path();
-        return $this->getServiceResponse($input['request_api'], 'delete', $path, $query, $post);
+        $post = $request->post();        
+        return $this->getServiceResponse(strtoupper(str_replace('-','_',$request_api)), strtolower($method), $path, $query, $post);
     }
 
 }
