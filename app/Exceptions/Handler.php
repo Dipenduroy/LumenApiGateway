@@ -10,6 +10,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use League\OAuth2\Server\Exception\OAuthServerException;
+
 
 class Handler extends ExceptionHandler {
 
@@ -23,6 +25,7 @@ class Handler extends ExceptionHandler {
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        OAuthServerException::class
     ];
 
     /**
