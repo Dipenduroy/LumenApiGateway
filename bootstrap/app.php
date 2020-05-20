@@ -116,5 +116,6 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 $app->configure('auth');
+$app->configure('testing');
 
 return $app;

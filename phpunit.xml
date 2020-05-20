@@ -6,6 +6,10 @@
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory suffix="Test.php">./tests</directory>
+            
+<!--        <file>tests/CheckMicroServiceStatusTest.php</file>
+            <file>tests/RegistrationTest.php</file>
+            <file>tests/LoginTest.php</file>-->
         </testsuite>
     </testsuites>
     <filter>

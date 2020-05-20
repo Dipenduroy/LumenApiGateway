@@ -41,3 +41,17 @@ Set correct url for USER_PREFERENCES_SERVICE in .env file
 ## Configure User subjects Micro service URL
 
 Set correct url for USER_SUBJECTS_SERVICE in .env file
+
+## Run Tests
+
+- Install phpXdebug
+
+- Generate the filter script for Xdebug to speed Up code coverage `vendor/bin/phpunit --dump-xdebug-filter build/xdebug-filter.php`
+
+- Run Unit tests `php artisan migrate:fresh --seed && vendor/bin/phpunit --testdox --prepend build/xdebug-filter.php --coverage-html storage/reports/codecoverage`
+
+- Generates Code coverage html report in `storage/reports/codecoverage` folder
+
+- To view code coverage in standard output, add flag during run tests `--coverage-text`
+
+
