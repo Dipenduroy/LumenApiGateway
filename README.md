@@ -16,6 +16,10 @@ Set mysql db connection, service basic auth credentials and URL for micro servic
 
 php artisan migrate
 
+## Create Passport Encryption Keys
+
+php artisan passport:install
+
 ## Generate a password based webclient in passport  
 
 php artisan passport:client --password 
