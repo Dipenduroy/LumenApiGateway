@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Services\Request\Helper;
 
 class RegisterController extends Controller {
 
@@ -16,13 +17,15 @@ class RegisterController extends Controller {
     public function __construct() {
         //
     }
+    
+    
 
     /**
      * Register a user.
      *
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(Request $request,Helper $helper) {
         $this->validate($request, [
             'name' => 'required|max:200',
             'email' => 'required|email|unique:users|max:200',
@@ -34,7 +37,7 @@ class RegisterController extends Controller {
         $response = User::create($userdata);
         $user_subject_data = $request->input('user_subject', []);
         if (!empty($user_subject_data)) {
-            $user_subject_response_string = $this->getServiceResponse('USER_SUBJECTS', 'post',
+            $user_subject_response_string = $helper->getServiceResponse('USER_SUBJECTS', 'post',
                     'api/user-subjects/user/' . $response->id, [],
                     ['user_subject' => $user_subject_data], true);
             $user_subject = json_decode($user_subject_response_string, 1);

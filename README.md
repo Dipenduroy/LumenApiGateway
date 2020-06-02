@@ -46,6 +46,11 @@ Set correct url for USER_PREFERENCES_SERVICE in .env file
 
 Set correct url for USER_SUBJECTS_SERVICE in .env file
 
+## Run Zipkin on Docker
+
+Run Docker engine before zipkin start
+
+`composer run-zipkin`
 ## Run Tests
 
 - Install phpXdebug
