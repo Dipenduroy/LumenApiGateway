@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Request\Helper;
 
 class ApigatewayController extends Controller {
 
@@ -22,7 +23,7 @@ class ApigatewayController extends Controller {
      *
      * @return Response
      */
-    public function handle(Request $request) {
+    public function handle(Request $request,Helper $helper) {
         $path = $request->path();
         list(, $request_api, $user_key, $user_id) = explode('/', $path);
         if ($user_key == 'user') {
@@ -34,7 +35,7 @@ class ApigatewayController extends Controller {
         $method = $request->method();
         $query = $request->query();
         $post = $request->post();
-        return $this->getServiceResponse(strtoupper(str_replace('-', '_', $request_api)), strtolower($method), $path, $query, $post);
+        return $helper->getServiceResponse(strtoupper(str_replace('-', '_', $request_api)), strtolower($method), $path, $query, $post);
     }
 
 }
