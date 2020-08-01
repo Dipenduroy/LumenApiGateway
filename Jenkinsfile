@@ -9,7 +9,7 @@ pipeline {
     }
     post {
         always {
-            emailext body: 'Jenkins completed a build for LumenApiGateway', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            emailext body: 'Jenkins completed a build for LumenApiGateway project', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }
