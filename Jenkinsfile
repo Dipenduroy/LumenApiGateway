@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Stage 1') {
             steps {
-                echo 'Hello Dipendu Roy!' 
+                echo 'Hello Dipendu, Auto deployment was successful.' 
             }
         }
     }
